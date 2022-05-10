@@ -113,12 +113,6 @@ const routes = [
         meta: { title: 'attrs2' },
     },
     {
-        path: '/attrsTest',
-        name: 'attrsTest',
-        component: () => import('../views/attrsTest/top.vue'),
-        meta: { title: 'attrsTest' },
-    },
-    {
         path: '/reduce',
         name: 'reduce',
         component: () => import('../views/reduce.vue'),
@@ -183,6 +177,18 @@ const routes = [
         name: 'vuex',
         component: () => import('../views/vuex.vue'),
         meta: { title: 'vuex' },
+    },
+    {
+        path: '/vuex',
+        name: 'vuex',
+        component: () => import('../views/vuex.vue'),
+        meta: { title: 'vuex' },
+    },
+    {
+        path: '/dynamicComponent',
+        name: 'dynamicComponent',
+        component: () => import('../views/dynamicComponent/father.vue'),
+        meta: { title: '动态组件' },
     },
 ];
 

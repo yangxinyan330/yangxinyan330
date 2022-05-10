@@ -9,6 +9,11 @@ export default {
             debouncedGetTableData: null,
         };
     },
+    async mounted(){
+        if(this.tableFun) {
+            await this.getTableData(this.tableFun);
+        }
+    },
     methods: {
         async getTableData(https){
             // 增加防抖功能防止create和beforeRouterEnter反复触发
@@ -144,6 +149,7 @@ export default {
             image.src = document.getElementById('images').src+'?tamp='+new Date().valueOf();
         },
         // confirm弹窗
+        // eslint-disable-next-line max-params
         confirmBox(callback, tips, cancelBtn, sureBtn) {
             return this.$confirm(tips ? tips : '确定此次操作吗?', '提示', {
                 confirmButtonText: sureBtn ? sureBtn : '确定',

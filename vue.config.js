@@ -5,8 +5,8 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin'); // 开�
 const productionGzipExtensions = ['js', 'css'];
 module.exports = {
     devServer: {
-        hot: true,// 自动保存
-        open: true,// 自动启动
+        hot: false,// 自动保存
+        open: false,// 自动启动
         port: 8080,// 默认端口号
         host: '0.0.0.0'
     },

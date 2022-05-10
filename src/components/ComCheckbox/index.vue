@@ -36,7 +36,14 @@ export default {
             let checkedCount = value.length;
             this.checkAll = checkedCount === this.cityOptions.length;
             this.isIndeterminate = checkedCount > 0 && checkedCount < this.cityOptions.length;
-            console.log('勾选', this.checkedCities);
+            // 按照后端返回的顺序进行传参
+            let arr = this.checkedCities.map(m => m.key);
+            let arr2 = this.cityOptions.map(m => m.key );
+            arr.sort((a, b) => {
+                return arr2.indexOf(a) - arr2.indexOf(b);
+            });
+            console.log('勾选', arr);
+            console.log('后端返回', this.cityOptions);
         }
     }
 };

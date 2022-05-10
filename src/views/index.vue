@@ -21,7 +21,6 @@
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './input' })">input输入框</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './addLess' })">加减法</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './attrs2' })">$attrs2</el-button></p>
-        <p><el-button type="primary" size="medium" @click="$router.push({ path: './attrsTest' })">attrsTest</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './reduce' })">reduce</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './set' })">$set</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './MMM' })">面试题</el-button></p>
@@ -34,6 +33,8 @@
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './debounce' })">防抖节流</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './AAA' })">所有</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './vuex' })">vuex</el-button></p>
+        <p><el-button type="primary" size="medium" @click="$router.push({ path: './dynamicComponent' })">动态组件</el-button></p>
+        <div class="test-bg" />
     </div>
 </template>
 
@@ -69,6 +70,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.test-bg{
+    background: url('../assets/images/icon-bg.png');
+    width: 200px;
+    height: 200px;
+}
     .wrapper {
         width: 100px;
         height: 500px;

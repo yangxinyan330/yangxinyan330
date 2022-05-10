@@ -1,18 +1,10 @@
 <template>
     <div class="table">
         <el-table :data="tableData" border style="width: 100%">
-            <!-- <el-table-column
-                v-for="(item, index) in tableTitle"
-                :key="index"
-                :label="item.name"
-                :prop="item.value"
-                align="center"
-            /> -->
             <el-table-column
                 v-for="(item, index) in tableTitle"
                 :key="index"
-                :label="item.name"
-                :prop="myComputed(item.value, item.filter)"
+                v-bind="item"
                 align="center"
             />
             <slot />
@@ -20,7 +12,6 @@
                 <com-empty />
             </template>
         </el-table>
-        <!-- <div>{{ commentTypeFilter(1) }}</div> -->
         <el-row v-if="tableData.length">
             <el-col
                 :span="24"

@@ -31,22 +31,18 @@ export default {
                 status: 1,
                 text: ''
             },
+            tableFun: 'getList',
             tableData: [],
             tableTitle: [
-                { name: '热门', value: 'hot' },
-                // { name: '地址', value: 'title' },
-                { name: '状态', value: 'index', filter: this.commentTypeFilter},
+                { label: '热门', width: 100, prop: 'name' },
+                { label: '状态', prop: 'msg', filter: this.commentTypeFilter},
             ],
         };
-    },
-    mounted(){
-        this.getTableData('getProblemTypes');
     },
     methods: {
         // 其他参数
         otherParams(){
             let p = { ...this.formParams, ...this.pageParams };
-            p.id = 123456;
             return this.deleteEmptyParams(p);
         },
         // 获取列表

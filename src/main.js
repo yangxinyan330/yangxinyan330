@@ -4,6 +4,7 @@ import router from './router';
 import store from './store';
 import http from './serve/http.js';
 Vue.prototype.$http = http;
+import './styles/index.less';
 
 import mixins from './mixins/index.js';
 Vue.mixin(mixins);
