@@ -1,8 +1,6 @@
 <template>
     <!-- eslint-disable vue/singleline-html-element-content-newline -->
     <div class="index">
-        <p>手机号校验：{{ $checkMobile(phone) }}</p>
-        <p>手机号隐藏：{{ $mobileMin(phone) }}</p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './AAA' })">所有</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: '/newMethods' })">不同写法</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: '/echart' })">echart走势图</el-button></p>
@@ -23,7 +21,7 @@
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './attrs2' })">$attrs2</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './reduce' })">reduce</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './set' })">$set</el-button></p>
-        <p><el-button type="primary" size="medium" @click="$router.push({ path: './MMM' })">面试题</el-button></p>
+        <p><el-button type="primary" size="medium" @click="$router.push({ path: './slot' })">slot</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './table' })">table</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './numbers' })">数字处理</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './checkboxRadio' })">复选和单选</el-button></p>
@@ -34,7 +32,7 @@
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './AAA' })">所有</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './vuex' })">vuex</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './dynamicComponent' })">动态组件</el-button></p>
-        <div class="test-bg" />
+        <!-- <div class="test-bg" /> -->
     </div>
 </template>
 

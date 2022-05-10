@@ -125,10 +125,10 @@ const routes = [
         meta: { title: 'set' },
     },
     {
-        path: '/MMM',
-        name: 'MMM',
-        component: () => import('../views/MMM.vue'),
-        meta: { title: 'MMM' },
+        path: '/slot',
+        name: 'slot',
+        component: () => import('../views/slot.vue'),
+        meta: { title: 'slot' },
     },
     {
         path: '/table',
