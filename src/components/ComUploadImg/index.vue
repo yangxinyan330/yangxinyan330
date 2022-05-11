@@ -269,7 +269,7 @@ export default {
             let index = arr.findIndex((item) => {
                 return type.toLocaleUpperCase() === item.toLocaleUpperCase();
             });
-            return index != -1;
+            return index !== -1;
         },
         clearFileList() {
         // 清空上传图片列表

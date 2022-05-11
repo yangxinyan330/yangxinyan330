@@ -4,7 +4,6 @@ import router from './router';
 import store from './store';
 import http from './serve/http.js';
 Vue.prototype.$http = http;
-import './styles/index.less';
 
 import mixins from './mixins/index.js';
 Vue.mixin(mixins);
@@ -13,10 +12,10 @@ Vue.mixin(mixins);
 import componentJs from './utils/componentJs.js';
 Vue.use(componentJs);
 
-import * as filters from '@/invariable/filters'; // global filters
-Object.keys(filters).forEach(key => {
-    Vue.filter(key, filters[key]);
-});
+// import * as filters from '@/invariable/filters'; // global filters
+// Object.keys(filters).forEach(key => {
+//     Vue.filter(key, filters[key]);
+// });
 
 // 防止多次点击Button    v-preventReClick
 Vue.directive('preventReClick', {

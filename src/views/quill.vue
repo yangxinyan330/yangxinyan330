@@ -17,6 +17,7 @@ export default {
     },
     mounted(){
         let t = 2000;
+        // eslint-disable-next-line no-use-before-define
         let set1 = setInterval(fn, t);
         function fn() {
             console.log('我是用来测试打印速度的');

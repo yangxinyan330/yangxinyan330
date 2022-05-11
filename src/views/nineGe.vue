@@ -64,7 +64,10 @@
 export default {
     props: {
         chartData: {
-            require: true
+            type: Array,
+            default: () => {
+                [];
+            }
         },
         type: {
             type: String,
