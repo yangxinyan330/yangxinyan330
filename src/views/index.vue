@@ -32,7 +32,7 @@
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './AAA' })">所有</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './vuex' })">vuex</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './dynamicComponent' })">动态组件</el-button></p>
-        <!-- <div class="test-bg" /> -->
+        <div class="test-bg" />
     </div>
 </template>
 

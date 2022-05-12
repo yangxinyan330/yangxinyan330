@@ -1,7 +1,11 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 可将css代码打包成一个单独的css文件
-const { VueLoaderPlugin } = require('vue-loader');
+// const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // 生成html文件
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 每次构建前清除dist目录
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 把css打包并引入index.html
+// const PurgecssPlugin = require('purgecss-webpack-plugin'); // 清除未使用的css
+// const glob = require('glob-all');
+// const VueLoaderPlugin = require('vue-loader/lib/plugin'); // 解析.vue文件+
 
 module.exports = {
     // 模式 开发模式
@@ -16,8 +20,6 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
         // js文件下
         filename: 'js/chunk-[contenthash].js',
-        // 每次打包前自动清除旧的dist
-        clean: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -30,27 +32,15 @@ module.exports = {
             // js文件插入 body里
             inject: 'body',
         }),
-        new VueLoaderPlugin(),
+        new CleanWebpackPlugin(),
     ],
     module: {
         rules: [
             // css配置
             {
-            // 匹配文件后缀的规则
-                test: /\.(css|s[cs]ss)$/,
-                use: [
-                    // loader执行顺序是从右到左
-                    MiniCssExtractPlugin.loader,
-                    'less-loader',
-                    // {
-                    //   loader: 'sass-resources-loader',
-                    //   options: {
-                    //     resources: [
-                    //       // 放置全局引入的公共scss文件
-                    //     ],
-                    //   },
-                    // },
-                ],
+                test: /\.(css|s[cs]ss|less)$/,
+                // 从右往左加载
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
             },
             // js配置
             {
