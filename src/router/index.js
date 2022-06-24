@@ -190,6 +190,12 @@ const routes = [
         component: () => import('../views/dynamicComponent/father.vue'),
         meta: { title: '动态组件' },
     },
+    {
+        path: '/es6',
+        name: 'es6',
+        component: () => import('../views/es6.vue'),
+        meta: { title: 'es6' },
+    },
 ];
 
 const router = new VueRouter({
