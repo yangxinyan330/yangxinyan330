@@ -207,7 +207,7 @@ module.exports = {
         // 是否允许非空数组里面有多余的空格
         'array-bracket-spacing': 'error',
         // 大括号风格
-        'brace-style': ['error', '1tbs'],
+        // 'brace-style': ['error', '1tbs'],
         // 避免多次调用回调什么的
         'callback-return': 'off',
         // 强制驼峰法命名

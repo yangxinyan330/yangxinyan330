@@ -1,31 +1,60 @@
 <template>
     <div>
-        <div ref="scrollList" class="list_arr" @scroll="mixinScroll($event)">
-            <p>111</p>
-            <p>222</p>
-            <p>333</p>
-            <p>444</p>
-            <p>555</p>
-            <p>666</p>
-            <p>777</p>
+        <div class="list_arr">
+            <van-pull-refresh v-model="refreshLoading" @refresh="mixinOnRefresh">
+                <van-list
+                    v-model="isLoading"
+                    :finished="isFinished"
+                    finished-text="没有更多了"
+                    @load="mixinOnLoad"
+                >
+                    <van-cell v-for="item in loadingList" :key="item.id">
+                        {{ item.id }}-{{ item.title }}
+                    </van-cell>
+                </van-list>
+            </van-pull-refresh>
         </div>
     </div>
 </template>
 
 <script>
 export default {
+    data(){
+        return {
+            loadingList: [],
+            formParams: {
+                page: 1,
+                size: 50
+            }
+        };
+    },
+    mounted(){
+        this.confirmBox(this.getList, '是否加载此次请求？');
+    },
     methods: {
-        getList(){
-            console.log('滚动加载数据');
+        async getList(){
+            try{
+                let res = await this.$http('getListPage', this.formParams);
+                if(res.value.records.length > 0){
+                    this.loadingList = [...this.loadingList, ...res.value.records];
+                    this.isFinished = false;
+                }else{
+                    this.isFinished = true;
+                }
+                this.isLoading = false;
+                this.refreshLoading = false;
+            }catch(err){
+                console.log('err===',err);
+            }
         },
+
     }
 };
 </script>
 
 <style lang="less" scoped>
-    .list_arr{
-        max-height: 100px;
+    ::v-deep .list_arr{
+        max-height: 500px;
         overflow-y: scroll;
-        border: 1px solid red;
     }
 </style>

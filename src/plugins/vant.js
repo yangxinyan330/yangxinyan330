@@ -14,7 +14,9 @@ import {
     Toast,
     IndexBar,
     IndexAnchor,
-    Cell
+    Cell,
+    PullRefresh,
+    List
 } from 'vant';
 
 Vue.use(Skeleton);
@@ -23,6 +25,8 @@ Vue.use(Toast);
 Vue.use(IndexBar);
 Vue.use(IndexAnchor);
 Vue.use(Cell);
+Vue.use(PullRefresh);
+Vue.use(List);
 
 Vue.prototype.$dialog = Dialog;
 Vue.prototype.$toast = Toast;

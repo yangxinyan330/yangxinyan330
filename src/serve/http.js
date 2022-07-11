@@ -21,12 +21,12 @@ axios.interceptors.request.use(config => {
     let baseUrl = process.env.NODE_ENV === 'development' ? devs.VUE_APP_HOST : '';
     // let baseUrl = "http://localhost:8080";
     httpType = config.type ? config.type : 1;
-    // let token = Cookie.get("token");
+    let token = 'fe242fc9-4447-4e44-b42d-a579764c42d1';
     config.url = api.url.indexOf('http') > -1 ? api.url : baseUrl + api.url;
     config.responseType = api.responseType ? api.responseType : 'json';
     config.method = api.method;
     config.method === 'post' ? config.data = config.apiParams : config.params = config.apiParams;
-    // config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = `Bearer ${token}`;
     if (api.showLoading) {
         loading = Loading.service({
             text: api.loadingText || '加载中···',
@@ -50,9 +50,9 @@ axios.interceptors.response.use(
         }
 
         // eslint-disable-next-line eqeqeq
-        if (code == 0 || res.config.responseType === 'blob' || res.data.success) {
+        if (code == 0 || res.config.responseType === 'blob' || res.data.success || code === 200) {
             // 请求成功
-            return res.data;
+            return res.data || res.value;
         } else if (res.data.code === '036' || res.data.code === '002') {
             // Cookie.remove("token");
             // router.push({path:'/login'});

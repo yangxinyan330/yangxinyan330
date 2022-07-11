@@ -2,6 +2,9 @@ import { debounce } from 'lodash';
 export default {
     data(){
         return {
+            refreshLoading: false,
+            isLoading: false,
+            isFinished: false,
             pageParams: {
                 page: 1,
                 pageSize: 10,
@@ -159,5 +162,22 @@ export default {
                 callback && callback();
             });
         },
+        // 下拉刷新
+        mixinOnRefresh(){
+            setTimeout(() => {
+                this.formParams.page = 1;
+                this.loadingList = [];
+                this.getList();
+            },500);
+        },
+        // 上拉加载
+        mixinOnLoad(){
+            setTimeout(() => {
+                if (!this.isFinished) {
+                    this.formParams.page += 1;
+                    this.getList();
+                }
+            },500);
+        }
     }
 };

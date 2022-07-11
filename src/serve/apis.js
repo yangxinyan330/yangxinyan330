@@ -29,6 +29,11 @@ const APIS = {
         method: 'get',
         showLoading: true
     },
+    getListPage: {
+        url: 'https://vegaverse-dev01.kankanai.com.cn/upms/logs/page',
+        method: 'post',
+        showLoading: true
+    }
 };
 
 export default APIS;

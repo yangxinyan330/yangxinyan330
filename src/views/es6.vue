@@ -10,14 +10,15 @@ export default {
         };
     },
     mounted(){
-        const fun = (name, age) => {
-            Object.assign(this,{name, age});
+        const fun = (name, age, sex) => {
+            Object.assign(this,{name, age, sex});
             // or
             // this.name = name;
             // this.age = age;
-            return this.name + this.age;
+            // this.sex = sex;
+            return `${name}-${sex}-${age}`;
         };
-        const result = fun('张三', 100);
+        const result = fun('张三', 100, '男');
         console.log('result===', result);
 
         // 函数默认参数
@@ -36,7 +37,7 @@ export default {
         console.log('obj===', newname, other);
 
         const arr = [1,2,3,4,5];
-        const [first, ...others] = arr;
+        const [first, others] = arr;
         console.log('arr===', first, others);
 
         const url = 'http://www.baidu.com?page=1&size=100';
@@ -55,9 +56,12 @@ export default {
         // for(let key of values(obj1)){
         //     console.log(key);
         // }
+        //
         // for(let key of entries(obj1)){
         //     console.log(key);
         // }
+
+
     },
 };
 </script>

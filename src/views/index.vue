@@ -12,7 +12,7 @@
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './quill' })">quill富文本</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './nineGe' })">九宫格</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './dateTime' })">时间前后段</el-button></p>
-        <p><el-button type="primary" size="medium" @click="$router.push({ path: './loading' })">下拉加载</el-button></p>
+        <p><el-button type="primary" size="medium" @click="$router.push({ path: './loading' })">上拉加载/下拉刷新</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './previewFile' })">预览及下载文件</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './uploadImg' })">上传图片</el-button></p>
         <!-- <p><el-button type="primary" size="medium" @click="$router.push({ path: './stores' })">vuex</el-button></p> -->
