@@ -196,6 +196,12 @@ const routes = [
         component: () => import('../views/es6.vue'),
         meta: { title: 'es6' },
     },
+    {
+        path: '/java',
+        name: 'java',
+        component: () => import('../views/java.vue'),
+        meta: { title: 'java' },
+    },
 ];
 
 const router = new VueRouter({
