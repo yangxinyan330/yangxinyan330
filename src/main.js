@@ -5,6 +5,13 @@ import store from './store';
 import http from './serve/http.js';
 Vue.prototype.$http = http;
 
+// 第一个是videoJs的样式，后一个是vue-video-player的样式，因为考虑到我其他业务组件可能也会用到视频播放，所以就放在了main.js内
+require('video.js/dist/video-js.css');
+// require('vue-video-player/src/custom-theme.css');
+/* 导入视频播放组件*/
+// import VideoPlayer from 'vue-video-player';
+// Vue.use(VideoPlayer);
+
 import mixins from './mixins/index.js';
 Vue.mixin(mixins);
 

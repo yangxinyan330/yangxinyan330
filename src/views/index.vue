@@ -34,7 +34,9 @@
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './dynamicComponent' })">动态组件</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './es6' })">es6</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './java' })">java</el-button></p>
-        <div class="test-bg" />
+        <p><el-button type="primary" size="medium" @click="$router.push({ path: './label' })">新标签</el-button></p>
+        <video src="blob:https://live.douyin.com/c83de1aa-7eba-4ab3-8855-cbae42a85c7a" />
+        <video class="" autoplay="" playsinline="true" x5-playsinline="true" webkit-playsinline="true" tabindex="2" mediatype="video" src="blob:https://live.douyin.com/c83de1aa-7eba-4ab3-8855-cbae42a85c7a" style="transform: scale(2.47423) translate(0%, 10.7813%);" />
     </div>
 </template>
 
@@ -70,22 +72,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.test-bg{
-    background: url('../assets/images/icon-bg.png');
-    width: 200px;
-    height: 200px;
-}
-    .wrapper {
-        width: 100px;
-        height: 500px;
-        border: 2px solid red;
-        box-sizing: border-box;
-        overflow: scroll;
-    }
-    .content {
-        border: 2px solid green;
-        height: 50000px;
-    }
     .index{
         padding: 0 30px;
         display: flex;

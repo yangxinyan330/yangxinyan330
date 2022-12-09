@@ -202,6 +202,12 @@ const routes = [
         component: () => import('../views/java.vue'),
         meta: { title: 'java' },
     },
+    {
+        path: '/label',
+        name: 'label',
+        component: () => import('../views/label.vue'),
+        meta: { title: 'label' },
+    },
 ];
 
 const router = new VueRouter({
@@ -211,7 +217,6 @@ const router = new VueRouter({
 
 export default router;
 
-// 解决点击同一导航不报错
 const routerPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
     return routerPush.call(this, location).catch(error => error);

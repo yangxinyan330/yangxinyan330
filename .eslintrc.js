@@ -13,7 +13,10 @@ module.exports = {
         SharedArrayBuffer: 'readonly'
     },
     rules: {
-        'vue/max-attributes-per-line': [2, {
+        // 换行
+        'vue/singleline-html-element-content-newline': 'off', // 单行html元素内容在新的一行
+        'vue/multiline-html-element-content-newline': 'off', // 多行html元素内容在新的一行
+        'vue/max-attributes-per-line': ['error', {
             'singleline': 10,
             'multiline': {
                 'max': 1,

@@ -101,6 +101,29 @@ export default {
         //         post: 创建资源  有请求体
         //         put: 更新资源   有请求体
         //         delete: 删除资源   无请求体
+
+        setTimeout(function(){
+            console.log('定时器开始啦');
+        });
+        new Promise(function(resolve){
+            console.log('马上执行for循环啦');
+            for(let i = 0; i < 10000; i++){
+                i === 99 && resolve();
+            }
+        }).then(function(){
+            console.log('执行then函数啦');
+        });
+        console.log('代码执行结束');
+
+        /*
+            首先执行script下的宏任务,遇到setTimeout,将其放到宏任务的【队列】里
+            遇到 new Promise直接执行,打印"马上执行for循环啦"
+            遇到then方法,是微任务,将其放到微任务的【队列里】
+            打印 "代码执行结束"
+            本轮宏任务执行完毕,查看本轮的微任务,发现有一个then方法里的函数, 打印"执行then函数啦"
+            到此,本轮的event loop 全部完成。
+            所以最后的执行顺序是【马上执行for循环啦 --- 代码执行结束 --- 执行then函数啦 --- 定时器开始啦】
+        */
     },
 };
 </script>

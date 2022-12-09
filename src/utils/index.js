@@ -189,6 +189,12 @@ export const objArr = arr => {
     return arr;
 };
 
+// 根据某个字段去重   this.objArr2(arr, 'name')
+export const objArr2 = (arr, name) => {
+    const res = new Map();
+    return arr.filter((item) => !res.has(item[name]) && res.set(item[name], 1));
+};
+
 // 基础数据 超过10000 添加 w 单位
 export const handleCount = value => {
     let numValue = Number(value);
