@@ -15,7 +15,7 @@ const APIS = {
         showLoading: true
     },
     getList: {
-        url: 'https://api.vvhan.com/api/saorao?tel=15677246297',
+        url: 'https://jsonplaceholder.typicode.com/posts',
         method: 'get',
         showLoading: true
     },

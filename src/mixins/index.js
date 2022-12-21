@@ -47,15 +47,6 @@ export default {
             });
             return temp;
         },
-        handleSizeChange(size){
-            this.pageParams.page = 1;
-            this.pageParams.pageSize = size;
-            this.getTableData();
-        },
-        handleCurrentChange(page){
-            this.pageParams.page = page;
-            this.getTableData();
-        },
         // 重置表单验证
         mixinResetValidate(formName){
             if(this.$refs.formName){
@@ -178,6 +169,27 @@ export default {
                     this.getList();
                 }
             },500);
-        }
+        },
+        // 其他参数
+        otherParams(){
+            let p = { ...this.formParams, ...this.pageParams };
+            return this.deleteEmptyParams(p);
+        },
+        // 每页条数
+        handleSizeChange(size){
+            this.pageParams.page = 1;
+            this.pageParams.pageSize = size;
+            this.getTableData();
+        },
+        // 翻页
+        handleCurrentChange(page){
+            this.pageParams.page = page;
+            this.getTableData();
+        },
+        // 勾选
+        handleSelectionChange(val){
+            console.log('拿到勾选====', val);
+        },
+
     }
 };

@@ -50,7 +50,7 @@ axios.interceptors.response.use(
         }
 
         // eslint-disable-next-line eqeqeq
-        if (code == 0 || res.config.responseType === 'blob' || res.data.success || code === 200) {
+        if (code == 0 || res.config.responseType === 'blob' || res.data.success || code === 200 || res.status === 200) {
             // 请求成功
             return res.data || res.value;
         } else if (res.data.code === '036' || res.data.code === '002') {

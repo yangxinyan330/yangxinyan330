@@ -19,4 +19,8 @@ export default{
     #app{
         padding: 30px;
     }
+    .spanBtn{
+        padding: 0 5px;
+        cursor: pointer;
+    }
 </style>
