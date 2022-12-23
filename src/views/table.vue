@@ -13,17 +13,25 @@
                 </template>
             </el-table-column>
         </item-table>
+        <ComDialog :dialog-visible="dialogVisible" :is-cancel="false" :is-comfirm="false">
+            <add ref="add" @closeDialog="dialogVisible = false" />
+        </ComDialog>
     </div>
 </template>
 
 <script>
 import { DELIVERY_TYPE } from '@/invariable/index.js';
 import { commentTypeFilter } from '@/invariable/filters.js';
+import Add from './Add.vue';
 export default {
+    components: {
+        Add
+    },
     data() {
         return {
             DELIVERY_TYPE,
             commentTypeFilter,
+            dialogVisible: true,
             formParams: {
                 status: 1,
                 text: ''
@@ -61,8 +69,18 @@ export default {
         },
         // 编辑
         handleEdit(row){
-            console.log('row====', row);
+            // console.log('row====', row);
+            this.dialogVisible = true;
         },
+        // 关闭dialog
+        closeDialog(type){
+            if(type === 'cancel'){
+                this.dialogVisible = false;
+            }else{
+                // const params
+                console.log('params====', {...this.$refs.add.formParams});
+            }
+        }
     }
 };
 </script>
