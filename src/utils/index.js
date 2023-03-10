@@ -210,3 +210,21 @@ export const handleCount = value => {
     }
     return value;
 };
+
+// js 循环切片取数组
+export const sliceArr = (arr, count) => {
+    let tableData = [];
+    let myStringArray = [1,2,3,4,5,6];
+    if (myStringArray.length > 5) {
+        let slpiceArr = (x) => {
+            const y = myStringArray.splice(0, x);
+            myStringArray = myStringArray.concat(y);
+            tableData = y;
+        };
+        tableData = slpiceArr(5);
+        setInterval(() => {
+            tableData = slpiceArr(5);
+        }, 2000);
+        return;
+    }
+};

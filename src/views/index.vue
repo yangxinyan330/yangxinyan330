@@ -35,6 +35,7 @@
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './es6' })">es6</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './java' })">java</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './label' })">新标签</el-button></p>
+        <p><el-button type="primary" size="medium" @click="$router.push({ path: './sliceArr' })">数组循环切片</el-button></p>
         <video src="blob:https://live.douyin.com/c83de1aa-7eba-4ab3-8855-cbae42a85c7a" />
         <video class="" autoplay="" playsinline="true" x5-playsinline="true" webkit-playsinline="true" tabindex="2" mediatype="video" src="blob:https://live.douyin.com/c83de1aa-7eba-4ab3-8855-cbae42a85c7a" style="transform: scale(2.47423) translate(0%, 10.7813%);" />
     </div>

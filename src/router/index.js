@@ -208,6 +208,12 @@ const routes = [
         component: () => import('../views/label.vue'),
         meta: { title: 'label' },
     },
+    {
+        path: '/sliceArr',
+        name: 'sliceArr',
+        component: () => import('../views/sliceArr.vue'),
+        meta: { title: 'sliceArr' },
+    },
 ];
 
 const router = new VueRouter({
