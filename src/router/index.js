@@ -197,12 +197,6 @@ const routes = [
         meta: { title: 'es6' },
     },
     {
-        path: '/java',
-        name: 'java',
-        component: () => import('../views/java.vue'),
-        meta: { title: 'java' },
-    },
-    {
         path: '/label',
         name: 'label',
         component: () => import('../views/label.vue'),

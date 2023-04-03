@@ -211,20 +211,21 @@ export const handleCount = value => {
     return value;
 };
 
-// js 循环切片取数组
-export const sliceArr = (arr, count) => {
-    let tableData = [];
-    let myStringArray = [1,2,3,4,5,6];
-    if (myStringArray.length > 5) {
-        let slpiceArr = (x) => {
-            const y = myStringArray.splice(0, x);
-            myStringArray = myStringArray.concat(y);
-            tableData = y;
-        };
-        tableData = slpiceArr(5);
-        setInterval(() => {
-            tableData = slpiceArr(5);
-        }, 2000);
-        return;
+// 16进制转RGB
+export const hexToRGB = (hex, opacity) => {
+    let hexx = hex.replace('#', '0x');
+    let r = hexx >> 16;
+    let g = hexx >> 8 & 0xff;
+    let b = hexx & 0xff;
+    if(opacity){
+        return `rgba(${r}, ${g}, ${b}, ${opacity})`;
     }
+    return `rgb(${r}, ${g}, ${b})`;
+};
+
+// RGB进制转16
+export const RGBToHex = (rgb) => {
+    let rgbArr = rgb.split(/[^\d]+/);
+    let color = rgbArr[1]<<16 | rgbArr[2]<<8 | rgbArr[3];
+    return '#'+ color.toString(16);
 };

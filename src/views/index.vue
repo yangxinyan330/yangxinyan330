@@ -33,7 +33,6 @@
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './vuex' })">vuex</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './dynamicComponent' })">动态组件</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './es6' })">es6</el-button></p>
-        <p><el-button type="primary" size="medium" @click="$router.push({ path: './java' })">java</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './label' })">新标签</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './sliceArr' })">数组循环切片</el-button></p>
         <video src="blob:https://live.douyin.com/c83de1aa-7eba-4ab3-8855-cbae42a85c7a" />
@@ -43,6 +42,7 @@
 
 <script>
 import { setItem, getItem, removeItem } from '../utils/storage.js';
+import { hexToRGB, RGBToHex } from '@/utils/index.js';
 export default {
     data(){
         return {
@@ -62,12 +62,18 @@ export default {
         ];
         setItem('nums', arr);
         console.log(getItem('nums'));
-        this.closeTimer = setTimeout(() => {
+        let closeTimer = setTimeout(() => {
+            clearTimeout(closeTimer);
             removeItem('nums');
         },1000);
-    },
-    beforeDestroy() {
-        clearTimeout(this.closeTimer);
+
+        let arrs = [1,2,3,1,2];
+        console.log('最后一个元素===', arrs.at(-1));
+        console.log('数组去重===', [...new Set(arrs)]);
+        console.log('取整数====', ~~6.55);
+        console.log('hexToRGB====', hexToRGB('#f35154', 0.5));
+        console.log('RGBToHex====', RGBToHex('rgb(255,255,255)'));
+
     },
 };
 </script>
