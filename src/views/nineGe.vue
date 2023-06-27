@@ -97,6 +97,52 @@ export default {
                 ]
             ]
         };
+    },
+    mounted(){
+        const arr = [
+            {
+                id: 1,
+                children: [
+                    {
+                        id: 11,
+                        children: [
+                            {
+                                id: 111,
+                                children: []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 2,
+                children: [
+                    {
+                        id: 22,
+                        children: [
+                            {
+                                id: 222,
+                                children: []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+        console.log('多维转一维', this.filterArr(arr));
+    },
+    methods: {
+        filterArr(arr) {
+            return [].concat(...arr.map(item => {
+                if (item.children) {
+                    let arr = [].concat(item, ...this.filterArr(item.children));
+                    // delete item.children;
+                    return arr;
+                }
+                return [].concat(item);
+            }
+            ));
+        }
     }
 };
 </script>
