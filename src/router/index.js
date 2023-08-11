@@ -11,6 +11,12 @@ const routes = [
         meta: { title: 'index' },
     },
     {
+        path: '/test',
+        name: 'test',
+        component: () => import('../views/test.vue'),
+        meta: { title: '所有' },
+    },
+    {
         path: '/AAA',
         name: 'AAA',
         component: () => import('../views/AAA.vue'),

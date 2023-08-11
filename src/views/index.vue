@@ -1,6 +1,7 @@
 <template>
     <!-- eslint-disable vue/singleline-html-element-content-newline -->
     <div class="index">
+        <p><el-button type="primary" size="medium" @click="$router.push({ path: './test' })">test</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: './AAA' })">所有</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: '/newMethods' })">不同写法</el-button></p>
         <p><el-button type="primary" size="medium" @click="$router.push({ path: '/echart' })">echart走势图</el-button></p>
