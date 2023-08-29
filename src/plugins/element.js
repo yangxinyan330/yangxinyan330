@@ -9,7 +9,7 @@
 import Vue from 'vue';
 import 'element-ui/lib/theme-chalk/index.css';
 import { Input, Tabs, tabPane, Pagination, Breadcrumb, BreadcrumbItem, Message, MessageBox, Loading, Form, FormItem, Notification, Menu, Submenu, MenuItem, MenuItemGroup,
-    DatePicker, Button, Table, TableColumn, Select, Option, Checkbox, CheckboxButton, CheckboxGroup, Dialog, Row, Col, Tree, Image, Radio, RadioGroup, Tooltip, Popover } from 'element-ui';
+    DatePicker, Button, Table, TableColumn, Select, Option, Checkbox, CheckboxButton, CheckboxGroup, Dialog, Row, Col, Tree, Image, Radio, RadioGroup, Tooltip, Popover, Carousel, CarouselItem } from 'element-ui';
 
 Vue.prototype.$ELEMENT = { size: 'mini', zIndex: 3001 };
 
@@ -45,6 +45,8 @@ Vue.use(Radio);
 Vue.use(RadioGroup);
 Vue.use(Tooltip);
 Vue.use(Popover);
+Vue.use(Carousel);
+Vue.use(CarouselItem);
 // Vue.use(Notification);
 
 

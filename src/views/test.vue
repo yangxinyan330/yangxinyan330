@@ -1,29 +1,19 @@
 <template>
-    <div class="test-page">
-        <div class="test-page-title">
-            <div>应用中心 Application center</div>
-            <div>前往应用中心 Go to application center>></div>
-        </div>
-        <div class="test-page-content">
-            <div class="tabs">
-                <div v-for="(item, index) in tabList" :key="item.key" :class="['tabs-item', { 'tabs-item-active': tabIndex === index }]" @click="handleTabs(index)">
-                    <div>{{ item.label }}</div>
-                    <div>{{ item.label2 }}</div>
-                </div>
-            </div>
-            <div class="list">
-                <div v-for="item in tableData" :key="item.id" class="list-item">
-                    <div><img :src="handleImg(item.status)" alt="" class="list-item-img"></div>
-                    <div>{{ item.label }}</div>
-                    <div>({{ item.status !== 0 ? handleStatus(item.status) :item.label2 }})</div>
-                </div>
-                <div class="list-item list-page">
-                    <div class="item">
-                        <div>上一页 Prievious</div>
-                        <div>下一页 Next</div>
-                    </div>
-                </div>
-            </div>
+    <div ref="figurebox" class="figure-box">
+        <!--限定范围盒子-->
+        <div id="egg-range" class="egg-range">
+            <!--移动图片素材-->
+            <img
+                id="egg"
+                ref="maskBox"
+                class="egg"
+                :src="eggImg"
+                :style="{
+                    width: `${eggWidth}px`,
+                    left: `${eggLeft}`,
+                    bottom: `${eggBottom}%`,
+                }"
+            >
         </div>
     </div>
 </template>
@@ -32,151 +22,175 @@
 export default {
     data() {
         return {
-            img1: require('@/assets/images/icon-1.png'),
-            img2: require('@/assets/images/icon-2.png'),
-            img3: require('@/assets/images/icon-3.png'),
-            params: {
-                current: 1,
-                pageSize: 20,
-            },
-            tabIndex: 0,
-            tabList: [
-                { key: 1, label: '我的常用应用', label2: 'My applications' },
-                { key: 2, label: '生产应用系统', label2: 'Production apps' },
-                { key: 3, label: 'HSSE相关应用系统', label2: 'HSSE-related' },
-                { key: 4, label: '办公应用系统', label2: 'Offce apps' },
-                { key: 5, label: '预留', label2: 'coming soon' },
-                { key: 6, label: '预留', label2: 'coming soon' },
-            ],
-            tableData: [
-                // status: 0正常显示  1使用中  2即将上线 3异常
-                { id: 1, label: '我的常用应用', label2: 'BSC', status: 0 },
-                { id: 2, label: '作业预报系统', label2: 'SWF', status: 1 },
-                { id: 3, label: '我的常用应用', label2: 'ASD', status: 2 },
-                { id: 4, label: '我的常用应用', label2: 'BSD', status: 3 },
-                { id: 5, label: '我的常用应用', label2: 'ARS', status: 1 },
-                { id: 6, label: '我的常用应用', label2: 'ARS', status: 0 },
-                { id: 7, label: '我的常用应用', label2: 'ARS', status: 1 },
-                { id: 8, label: '我的常用应用', label2: 'ARS', status: 0 },
-                { id: 9, label: '我的常用应用', label2: 'ARS', status: 1 },
-                { id: 10, label: '我的常用应用', label2: 'ARS', status: 1 },
-                { id: 11, label: '我的常用应用', label2: 'BSC', status: 0 },
-                { id: 12, label: '作业预报系统', label2: 'SWF', status: 1 },
-                { id: 13, label: '我的常用应用', label2: 'ASD', status: 2 },
-                { id: 14, label: '我的常用应用', label2: 'BSD', status: 3 },
-                { id: 15, label: '我的常用应用', label2: 'ARS', status: 0 },
-                { id: 16, label: '我的常用应用', label2: 'ARS', status: 0 },
-                { id: 17, label: '我的常用应用', label2: 'ARS', status: 0 },
-                { id: 18, label: '我的常用应用', label2: 'ARS', status: 0 },
-                { id: 19, label: '我的常用应用', label2: 'ARS', status: 0 },
-                { id: 20, label: '我的常用应用', label2: 'ARS', status: 0 },
-            ]
+            eggImg: require('../assets/images/icon-egg-1.png'),
+            size: 0, // 缩放大小
+            mousewheelevt: null,
+            eggWidth: 100, // 蛋的宽度
+            eggLeft: '50%', // 蛋左边距
+            eggBottom: 6, // 蛋底边距
         };
     },
-    // computed: {
-    //     imgPath(){
-    //         retur
-    //     }
-    // },
+    mounted() {
+        this.drag();
+        setTimeout(() => {
+        // 兼容火狐浏览器
+            this.mousewheelevt = /Firefox/i.test(navigator.userAgent)
+                ? 'DOMMouseScroll'
+                : 'mousewheel';
+            // 为空间区域绑定鼠标滚轮事件 =》 处理函数是wheelHandle
+            // console.log('this.$refs.maskBox===', this.$refs.maskBox);
+            // 如果你监听了window的scroll或者touchmove事件，你应该把passive设置为true，这样滚动就会流畅很多
+            this.$refs.maskBox.addEventListener(this.mousewheelevt, this.wheelHandle);
+        }, 1000);
+    },
     methods: {
-        // 状态处理(正式开发需提出去)
-        handleStatus(status){
-            let title = '';
-            const statusArr = {
-                1: () => title = '使用中',
-                2: () => title = '即将上线',
-                3: () => title = '异常',
-            };
-            statusArr[status] ? statusArr[status]() : title = '';
-            return title;
+        handleReturn(){
+            this.eggWidth = 100;
+            this.eggLeft = `calc(50% - ${this.eggWidth / 2}px)`;
+            this.eggBottom = 6;
+            let dragBox = document.getElementById('egg');
+            dragBox.style.top = 'inherit';
         },
-        handleImg(status){
-            let title = '';
-            const statusArr = {
-                0: () => title = this.img1,
-                1: () => title = this.img1,
-                2: () => title = this.img2,
-                3: () => title = this.img3,
-            };
-            statusArr[status] ? statusArr[status]() : title = '';
-            return title;
+        wheelHandle(e) {
+            e.preventDefault();
+            const ev = e || window.event; // 兼容性处理 => 火狐浏览器判断滚轮的方向是属性 detail，谷歌和ie浏览器判断滚轮滚动的方向是属性 wheelDelta
+            // dir = -dir; // dir > 0 => 表示的滚轮是向上滚动，否则是向下滚动 => 范围 (-120 ~ 120)
+            const dir = ev.detail ? ev.detail * -120 : ev.wheelDelta;
+            // 滚动的数值 / 2000 => 表示滚动的比例，用此比例作为图片缩放的比例
+            this.imgScaleHandle(dir / 2000);
         },
-        // 选项卡
-        handleTabs(index){
-            this.tabIndex = index;
-        }
-    }
+        imgScaleHandle(zoom) {
+            this.size += zoom;
+            // console.log(this.size)
+            if (this.size < -0.5) {
+                this.size = -0.5;
+            }
+            if (this.size > 1) {
+                this.size = 1;
+            }
+            this.eggWidth= 100*(1+this.size);
+            let dragBox = document.getElementById('egg');
+            if(dragBox.style.width>=150*2){
+                dragBox.style.width=300;
+            }
+            if(dragBox.style.width<=75){
+                dragBox.style.width=75;
+            }
+            if(dragBox.style.width>=207*2){
+                dragBox.style.width=414;
+            }
+            if(dragBox.style.width<=103){
+                dragBox.style.width=103;
+            }
+            dragBox.style.width=this.eggWidth+'px';
+            // dragBox.style.height=207*(1+this.size)+'px';
+
+            // dragBox.style.height="auto"
+            // dragBox.style.height=dragBox.offsetHeight*(1+this.size)+'px'
+
+            // console.log(this.width,'llll')
+        },
+        drag() {
+            let event1 = false; // 初始化是否鼠标移动
+            let dragBox = document.getElementById('egg');
+            let pardnode=document.getElementById('egg-range'); // 获取当前元素
+            // console.log(dragBox.style.clientHeight)
+            // dragBox.style.height=dragBox.offsetHeight+'px'
+            dragBox.style.left=pardnode.offsetWidth/2-dragBox.offsetWidth/2+'px';
+            // dragBox.style.top= '58%';
+            // dragBox.style.transform="translate(-50%,-50%)"
+
+            //   let pardnode = document.getElementById("egg-range");
+            let imgMakeBox; // 父盒子
+            let moveW = 0; // 移动元素的width
+            let moveH = 0; // 移动元素的height
+            let parentW = 0; // 父盒子的width
+            let parentH = 0; // 父盒子的height
+            // 鼠标按下
+            dragBox.addEventListener('mousedown', (el) => {
+                el.stopPropagation();
+                el.stopImmediatePropagation();
+                event1 = true;
+                imgMakeBox = document.getElementById('egg-range'); // 获取父元素
+                moveW = dragBox.offsetWidth;
+                moveH = dragBox.offsetHeight;
+                parentW = imgMakeBox.offsetWidth; // 父盒子的width
+                parentH = imgMakeBox.offsetHeight; // 父盒子的height
+                // 算出鼠标相对元素的位置
+                let disX = el.clientX - dragBox.offsetLeft;
+                let disY = el.clientY - dragBox.offsetTop;
+                // 鼠标移动
+                document.addEventListener('mousemove', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    // dragBox.style.transform='none';
+                    // console.log(this.event1);
+                    if (!event1) {return false;}
+                    // 用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
+                    let left = e.clientX - disX;
+                    let top = e.clientY - disY;
+                    let resW = parentW - moveW; // 父盒子宽减去移动盒子的宽 = 最大可移动的区域
+                    let resH = parentH - moveH; // 父盒子高减去移动盒子的高 = 可最大移动的区域
+                    left = left >= resW ? resW : left <= 0 ? 0 : left;
+                    top = top >= resH ? resH : top <= 0 ? 0 : top;
+
+                    // 移动当前元素
+                    let h=pardnode.offsetHeight;
+                    let w=pardnode.offsetWidth;
+                    dragBox.style.left = left/w*100 + '%';
+                    dragBox.style.top = top/h*100 + '%';
+                    dragBox.style.bottom = 100 - top/h*100 - dragBox.offsetHeight / pardnode.offsetHeight * 100 + '%';
+                    console.log('蛋的宽高===', dragBox.offsetWidth, dragBox.offsetHeight);
+                    console.log('左边===' + dragBox.style.left, '下边===', 100 - top/h*100 - dragBox.offsetHeight / pardnode.offsetHeight * 100 + '%');
+                });
+            });
+            // 鼠标抬起事件
+            document.onmouseup = () => {
+                event1 = false;
+                let dragBox = document.getElementById('egg');
+                this.eggLeft = dragBox.style.left;
+                this.eggBottom = dragBox.style.bottom;
+            };
+        },
+    },
 };
 </script>
-<style lang="less" scoped>
-    .test-page{
-        border: 1px solid #666;
-        padding: 20px;
-        color: #8a8a8a;
-        &-title{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: rgb(7, 171, 230);
-            margin-bottom: 10px;
-            &>div{
-                &:first-child{
-                    font-size: 24px;
-                    font-weight: bold;
-                }
-                &:last-child{
-                    text-decoration: underline;
-                    cursor: pointer;
-                }
-            }
-        }
-        &-content{
-            .tabs{
-                display: flex;
-                &-item{
-                    flex: 1;
-                    text-align: center;
-                    background: #eee;
-                    border-top-left-radius: 4px;
-                    border-top-right-radius: 4px;
-                    border: 1px solid #ddd;
-                    padding: 10px 0;
-                    cursor: pointer;
-                    &-active{
-                        color: rgb(7, 171, 230);
-                        background: white;
-                    }
-                }
-            }
-            .list{
-                display: flex;
-                flex-wrap: wrap;
-                padding: 10px 0;
-                &-item{
-                    width: calc(14.28% - 8.6px);
-                    text-align: center;
-                    margin: 7px 0;
-                    &:not(:nth-child(7n)){
-                        margin-right: 10px;
-                    }
-                    &-img{
-                        width: 80px;
-                    }
-                }
-                &-page{
-                    color: rgb(7, 171, 230);
-                    font-size: 12px;
-                    text-align: left;
-                    display: flex;
-                    align-items: flex-end;
-                    .item{
-                        &>div{
-                            cursor: pointer;
-                            text-decoration: underline;
-                        }
-                    }
-                }
-            }
-        }
-    }
-</style>
+
+  <style scoped>
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  .figure-box {
+    margin: auto;
+    /*图片比例 1:2*/
+    width: 400px;
+    height: 800px;
+    background-image: url("../assets//images/icon-incubation-bg.png");
+    background-size: 100% 100%;
+    position: relative;
+  }
+  #egg-range {
+    position: absolute;
+    width: 100%; /*限定范围宽度*/
+    height: 400px; /*限定范围高度*/
+    border: 2px solid red;
+    overflow: hidden;
+    bottom: 20%;
+  }
+  #egg {
+    /* outline: 2px solid #2a82e4; */
+    cursor: move;
+    /* width: 100px; */
+    /* height: 207px; */
+    cursor: pointer;
+    padding: 1px;
+    /* width: 100px; */
+    /* height: 100px; */
+    position: absolute;
+    /* top: ; */
+    /* left: 50%; */
+    /* transform: translate(-50%,-50%); */
+    /* background-color: red; */
+  }
+  </style>

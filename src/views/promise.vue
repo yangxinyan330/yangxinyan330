@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import { controlMoreFun } from '@/utils/index.js';
 export default {
     data(){
         return {
@@ -124,7 +125,50 @@ export default {
             到此,本轮的event loop 全部完成。
             所以最后的执行顺序是【马上执行for循环啦 --- 代码执行结束 --- 执行then函数啦 --- 定时器开始啦】
         */
+
+        // 多并发：多个异步操作同时进行，短时间过多的并发对前端浏览器、后端服务器有很大的压力
+        // 控制并发:  Promise.all本身不具备控制并发的能量，写了一个limitFn来控制
+        // 比如并发数为3，先定好3个方法执行，等某一个方法执行完，就从剩余的并发中补充一个进去，直到所以并发执行完
+        const fetchFn = (delay, index, fun) => {
+            return new Promise(resolve => {
+                let timer = setTimeout(() => {
+                    clearTimeout(timer);
+                    resolve(fun());
+                }, delay);
+            });
+        };
+        // 最大并发数 2
+        const generator = controlMoreFun(2);
+        const promises = [
+            generator(() => fetchFn(500, 1, this.fun1)),
+            generator(() => fetchFn(500, 2, this.fun2)),
+            generator(() => fetchFn(500, 3, this.fun3)),
+            generator(() => fetchFn(500, 4, this.fun4)),
+            generator(() => fetchFn(500, 5, this.fun5)),
+            generator(() => fetchFn(500, 6, this.fun6))
+        ];
+        Promise.all(promises);
     },
+    methods: {
+        fun1(){
+            this.$http('getList');
+        },
+        fun2(){
+            this.$http('getList');
+        },
+        fun3(){
+            this.$http('getList');
+        },
+        fun4(){
+            this.$http('getList');
+        },
+        fun5(){
+            this.$http('getList');
+        },
+        fun6(){
+            this.$http('getList');
+        },
+    }
 };
 </script>
 <style lang="less" scoped></style>

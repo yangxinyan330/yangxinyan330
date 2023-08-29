@@ -14,7 +14,8 @@
 // };
 module.exports = {
     presets: [
-    // 配置规则
+        // 配置规则
+        '@vue/app',
         '@babel/preset-env',
         '@vue/babel-preset-jsx'
     ],
@@ -27,6 +28,7 @@ module.exports = {
                 'libraryName': 'element-ui',
                 'styleLibraryName': 'theme-chalk'
             }
-        ]
+        ],
+        '@babel/plugin-proposal-optional-chaining'// 在此处配置
     ]
 };

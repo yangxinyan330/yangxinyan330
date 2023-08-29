@@ -214,6 +214,12 @@ const routes = [
         component: () => import('../views/sliceArr.vue'),
         meta: { title: 'sliceArr' },
     },
+    {
+        path: '/swiper',
+        name: 'swiper',
+        component: () => import('../views/swiper.vue'),
+        meta: { title: 'swiper' },
+    },
 ];
 
 const router = new VueRouter({

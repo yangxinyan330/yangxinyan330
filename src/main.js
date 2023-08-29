@@ -15,6 +15,7 @@ require('video.js/dist/video-js.css');
 import mixins from './mixins/index.js';
 Vue.mixin(mixins);
 
+
 // 全局注册所有组件
 import componentJs from './utils/componentJs.js';
 Vue.use(componentJs);

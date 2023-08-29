@@ -118,5 +118,22 @@ module.exports = {
             };
         }
         config.plugins = [...config.plugins, ...plugins];
+        {
+            [
+                {
+                    test: /\.m?js$/,
+                    exclude: /(node_modules|bower_components)/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            plugins: [
+                                '@babel/plugin-proposal-nullish-coalescing-operator',
+                                '@babel/plugin-proposal-optional-chaining'
+                            ]
+                        }
+                    }
+                }
+            ];
+        }
     }
 };
