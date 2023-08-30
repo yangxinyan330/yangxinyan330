@@ -265,3 +265,27 @@ export const controlMoreFun = (limit) => {
         });
     return generator;
 };
+
+// 防抖
+/*
+    let ipt = document.getElementById('ipt');
+    ipt.oninput = debounceFun(()=> {
+        this.iptVal = ipt.value;
+        this.getApprovalListFun();
+    }, 500);
+*/
+
+export const debounceFun = (fn, time) => {
+    let t;
+    let p = false;
+    return function(){
+        if(t){
+            clearTimeout(t);
+        }
+        t = setTimeout(() => {
+            fn();
+            p = true;
+        }, time);
+        p = false;
+    };
+};
