@@ -274,7 +274,6 @@ export const controlMoreFun = (limit) => {
         this.getApprovalListFun();
     }, 500);
 */
-
 export const debounceFun = (fn, time) => {
     let t;
     let p = false;
